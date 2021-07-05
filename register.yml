@@ -1,0 +1,10 @@
+---
+- name: Using Register Module
+  hosts: all
+  tasks:
+    - name: My Task to Install PHP
+      package:
+        name: php
+        state: present
+      register: output
+    - debug: var=output

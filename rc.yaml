@@ -1,0 +1,12 @@
+---
+- name: Play For Rc file transfer
+  hosts: all
+  tasks:
+    - name: Mounting DVD 
+      command:
+        cmd: "chmod +x /etc/rc.d/rc.local"    
+    - name: Copying File to all managed nodes
+      copy:
+        src: rc.local
+        dest: /etc/rc.d/rc.local
+

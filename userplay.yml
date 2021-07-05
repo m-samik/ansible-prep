@@ -1,0 +1,12 @@
+---
+- name: User Create with External VarFile
+  vars_files: 
+    - myvar.yml
+  hosts: all
+
+  tasks:
+    - name: My Task for User add
+      user:
+        name: "{{ user }}"
+        password: "{{ passwd }}"
+        state: present

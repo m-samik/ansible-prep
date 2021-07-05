@@ -1,0 +1,13 @@
+---
+- name: Patching Some Packages
+  hosts: all
+  vars_files: 
+    - myvar.yml
+  tasks: 
+    - name: "Updating {{ web }} , {{ firewall }} , and {{ py }}"
+      package:
+        name:
+          - "{{ web }}"
+          - "{{ firewall }}"
+          - "{{ py }}"
+        state: latest

@@ -1,0 +1,10 @@
+---
+- name: My Play to Remove WebServers
+  hosts: hosts
+  vars: 
+  - web_name: "httpd"
+  tasks:
+    - name: Unistalling Httpd
+      package:
+        name: "{{ web_name }}"
+        state: present

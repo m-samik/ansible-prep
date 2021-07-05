@@ -1,0 +1,7 @@
+user: msamik
+
+
+
+web: httpd
+firewall: firewalld
+py: python3

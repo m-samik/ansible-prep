@@ -1,0 +1,56 @@
+---
+- name: Play to Deploy Web Server with Dynamic Content
+  hosts: all
+
+  vars_prompt: 
+    - name: mycontent
+      private: no
+      prompt: "Your Dynamic Content for your Website  :"
+
+  tasks:
+    - name: Installing Httpd and Firewalld
+      package: 
+        name: 
+          - "httpd"
+          - "firewalld"
+        state: present
+
+    - name: Starting Services on HTTPD
+      service:         
+        name: httpd
+        state: started
+
+    - name: Starting Services on FIREWALLD
+      service:         
+        name: firewalld
+        state: started
+
+
+    - name: Passing our HTML Content
+      copy:
+        content: "{{ mycontent }}"
+        dest: "/var/www/html/index.html"
+
+    - name: "Opening / Enabling Port 80"
+      firewalld:
+        port: 80/tcp
+        state: enabled
+        permanent: yes
+        immediate: yes
+
+    - name: Restarting Services on HTTPD
+      service: 
+        name: httpd
+        state: restarted
+
+    - name: Restarting Services on FIREWALLD
+      service:           
+        name: firewalld  
+        state: restarted
+
+- name: My Local Play to check Web 
+  hosts: all
+  tasks: 
+    - command:
+        cmd: "firefox http://servera"
+
